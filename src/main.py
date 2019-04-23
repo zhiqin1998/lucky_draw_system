@@ -21,6 +21,7 @@ class GUI(tk.Tk):
         self.configparser.read('config.ini')
         self.start_num = int(self.configparser['NUM']['START'])
         self.end_num = int(self.configparser['NUM']['END'])
+        self.width = len(str(self.end_num))
         self.timer = float(self.configparser['DRAW']['DRAW_TIME'])
         self.rand_count = int(self.configparser['DRAW']['RANDOM_COUNT'])
 
@@ -60,7 +61,7 @@ class GUI(tk.Tk):
                 r_num = randint(self.start_num, self.end_num)
                 while r_num in self.exclude:
                     r_num = randint(self.start_num, self.end_num)
-                num.set('{:04d}'.format(r_num))
+                num.set('{:0{width}d}'.format(r_num, width = self.width))
                 time.sleep(self.timer / self.rand_count)
             submit.config(state='normal')
 
