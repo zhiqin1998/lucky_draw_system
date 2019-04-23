@@ -30,7 +30,7 @@ class GUI(tk.Tk):
         titleLabel = tk.Label(oframe, text='Lucky Draw', font=("Helvetica", 25))
         titleLabel.pack(fill=tk.X, pady=5)
         frame = tk.ttk.Frame(oframe, relief=tk.GROOVE)
-        frame.pack(pady=5, padx = 5)
+        frame.pack(pady=5, padx=5)
         nameFrame = tk.ttk.Frame(frame)
         nameFrame.pack(fill=tk.X, pady=5, padx=5)
         nameLabel = tk.ttk.Label(nameFrame, text='{0:15}\t:'.format('Numbers to Exclude (use comma to seperate it): '))
@@ -61,8 +61,9 @@ class GUI(tk.Tk):
                 while r_num in self.exclude:
                     r_num = randint(self.start_num, self.end_num)
                 num.set('{:04d}'.format(r_num))
-                time.sleep(self.timer/self.rand_count)
+                time.sleep(self.timer / self.rand_count)
             submit.config(state='normal')
+
         win = tk.Toplevel()
         win.grab_set()
         win.wm_title('Lucky Draw')
@@ -71,18 +72,19 @@ class GUI(tk.Tk):
         win.geometry("%dx%d+0+0" % (w, h))
         win.bind("<Escape>", lambda e: e.widget.quit())
         frame = tk.ttk.Frame(win, border=2, relief=tk.GROOVE)
-        frame.pack(fill=tk.BOTH,expand=True, padx=5, pady=5)
+        frame.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
         codeFrame = tk.ttk.Frame(frame)
         num = tk.StringVar()
         num.set('')
-        codeLabel = tk.ttk.Label(codeFrame, textvariable=num, font=("Helvetica", 300), anchor = 'center')
-        codeLabel.pack(expand = True, side = tk.TOP, fill=tk.BOTH)
-        codeFrame.pack(expand=True, side = tk.TOP, fill= tk.BOTH)
+        codeLabel = tk.ttk.Label(codeFrame, textvariable=num, font=("Helvetica", 300), anchor='center')
+        codeLabel.pack(expand=True, side=tk.TOP, fill=tk.BOTH)
+        codeFrame.pack(expand=True, side=tk.TOP, fill=tk.BOTH)
 
         submit = tk.ttk.Button(frame, text='Draw', width=10,
                                command=lambda: Thread(target=proceed).start())
         submit.pack(side=tk.BOTTOM, pady=5)
         win.bind('<Return>', lambda _: Thread(target=proceed).start())
+
 
 if __name__ == "__main__":
     app = GUI()
